@@ -2,7 +2,7 @@
 
 **SimpleToDoApp** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
-Submitted by: **Tejal Par**
+Submitted by: **Tejal Parulekar**
 
 Time spent: **3** hours spent in total
 
@@ -10,6 +10,51 @@ Time spent: **3** hours spent in total
 
 The following **required** functionality is completed:
 
-* [ ] User can **successfully add and remove items** from the todo list
-* [ ] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list.
-* [ ] User can **persist todo items** and retrieve them properly on app restart
+* [x] User can **successfully add and remove items** from the todo list
+* [x] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list.
+* [x] User can **persist todo items** and retrieve them properly on app restart
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='https://github.com/tejaldev/SimpleToDoApp/blob/master/ToDoList.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+## Project Analysis
+
+As part of your pre-work submission, please reflect on the app and answer the following questions below:
+
+**Question 1:** "What are your reactions to the Android app development platform so far? Compare and contrast Android's approach to layouts and user interfaces in past platforms you've used."
+
+**Answer:** HTML5 has been used widely for mobile web app. Advantage is one app works on all platforms and development skills doesn't need to platform specific. However layouts become too complicated when diffrent device needs to be supported. Android provides means to specify layouts for different devices. The layout designing is fairly easy using the IDE. 
+
+**Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method of the `ArrayAdapter`."
+
+**Answer:** An adapter maps the UI with its datasource. For instance in this app we use an ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items) which takes the list of items (i.e. datasource) and also the UI view template in which these items are to be shown. Speaking in terms of MVC pattern model is list of items view is listView and controller is the Adapter. 
+
+Technically all items in the listView have some view only difference is they will different data. When the listview scrolls some items will go offscreen. Instead of creating new view object when an item goes offscreen its view can be reused. ArrayAdapter's getView() method passes this view to be reused in convertView argument.
+
+
+ As the listview scrolls, an item will go offscreen. The view of the item that went offscreen can still be reused. As all list item views will be same only the data it displays changes. So as an optimization ArrayAdapter's getView() method has convertView argument, it contains the 
+
+## Notes
+
+Describe any challenges encountered while building the app.
+
+## License
+
+    Copyright [yyyy] [name of copyright owner]
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
