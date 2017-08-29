@@ -14,6 +14,12 @@ The following **required** functionality is completed:
 * [x] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list.
 * [x] User can **persist todo items** and retrieve them properly on app restart
 
+The following **optional** features are implemented:
+
+* [x] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
+* [x] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
+* [x] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -32,12 +38,9 @@ As part of your pre-work submission, please reflect on the app and answer the fo
 
 **Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method of the `ArrayAdapter`."
 
-**Answer:** An adapter maps the UI with its datasource. For instance in this app we use an ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items) which takes the list of items (i.e. datasource) and also the UI view template in which these items are to be shown. Speaking in terms of MVC pattern model is list of items view is listView and controller is the Adapter. 
+**Answer:** An adapter maps the UI with its datasource. For instance in this app we use an ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items) which takes the list of items (i.e. datasource) and also the UI view template in which these items are to be shown. Speaking in terms of MVC pattern model, list of items-view is listView and controller is the Adapter. 
 
-Technically all items in the listView have some view only difference is they will different data. When the listview scrolls some items will go offscreen. Instead of creating new view object when an item goes offscreen its view can be reused. ArrayAdapter's getView() method passes this view to be reused in convertView argument.
-
-
- As the listview scrolls, an item will go offscreen. The view of the item that went offscreen can still be reused. As all list item views will be same only the data it displays changes. So as an optimization ArrayAdapter's getView() method has convertView argument, it contains the 
+Technically all items in the listView have some view only difference is they will have different data. When the listview scrolls some items will go offscreen. The view of the item that went offscreen can still be reused. Instead of creating new view object when an item goes offscreen its view can be reused. ArrayAdapter's getView() method passes this view to be reused in convertView argument.
 
 ## Notes
 
