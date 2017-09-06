@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">SimpleToDoApp</string>
+    <string name="app_name">ToDoApp</string>
     <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="title_activity_calendar">Hello</string>
+    <string name="title_activity_add">Add Todo</string>
+    <string name="description_activity_add">Description</string>
+    <string name="date_activity_add">Date</string>
+    <string name="action_settings">Settings</string>
 </resources>

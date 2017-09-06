@@ -3,6 +3,8 @@ package com.codepath.simpletodoapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 
 /**
  * Class which holds task details
@@ -14,6 +16,7 @@ public class Task implements Parcelable {
 
     public long taskId;
     public String taskName;
+    public Date taskDate;
 
     public Task(Parcel source) {
         // read values from parcel
@@ -22,6 +25,11 @@ public class Task implements Parcelable {
 
     public Task() {
         // default constructor
+    }
+
+    public Task (String name, Date date) {
+        taskName = name;
+        taskDate = date;
     }
 
     @Override
@@ -33,6 +41,7 @@ public class Task implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(taskId);
         dest.writeString(taskName);
+        dest.writeLong(taskDate != null ? taskDate.getTime() : -1);
     }
 
     public static final Parcelable.Creator<Task> CREATOR
@@ -53,5 +62,7 @@ public class Task implements Parcelable {
         // read inorder
         taskId = source.readLong();
         taskName = source.readString();
+        long tempDate = source.readLong();
+        this.taskDate = tempDate == -1 ? null : new Date(tempDate);
     }
 }

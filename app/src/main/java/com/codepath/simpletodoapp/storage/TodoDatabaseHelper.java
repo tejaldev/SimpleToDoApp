@@ -10,6 +10,7 @@ import android.util.Log;
 import com.codepath.simpletodoapp.models.Task;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Database helper class. Creates and upgrades database
@@ -29,6 +30,7 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
     // Column
     private static final String TASK_ID_KEY = "taskId";
     private static final String TASK_NAME = "taskName";
+    private static final String TASK_DATE = "taskDate";
 
     // DB helper
     private static TodoDatabaseHelper sInstance;
@@ -48,7 +50,8 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String CREATE_TASK_TABLE = "CREATE TABLE IF NOT EXISTS " + TASK_TABLE + " ("
                 + TASK_ID_KEY +  " INTEGER PRIMARY KEY,"
-                + TASK_NAME + " TEXT"
+                + TASK_NAME + " TEXT, "
+                + TASK_DATE + " INTEGER NOT NULL DEFAULT (date('now'))"
                 + " );";
 
         sqLiteDatabase.execSQL(CREATE_TASK_TABLE);
@@ -62,23 +65,19 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Task addTask(String taskName) {
+    public Task addTask(Task task) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
-
-        Task task = null;
 
         try {
 
             ContentValues values = new ContentValues();
-            values.put(TASK_NAME, taskName);
+            values.put(TASK_NAME, task.taskName);
+            values.put(TASK_DATE, persistDate(task.taskDate));
 
             long taskId = db.insertOrThrow(TASK_TABLE, null, values);
             db.setTransactionSuccessful();
-
-            task = new Task();
             task.taskId = taskId;
-            task.taskName = taskName;
 
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to add task info to DB");
@@ -97,6 +96,7 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
             values.put(TASK_NAME, task.taskName);
+            values.put(TASK_DATE, persistDate(task.taskDate));
 
             int rows = db.update(TASK_TABLE, values, TASK_ID_KEY + "= ?", new String[]{String.valueOf(task.taskId)});
             if (rows == 1) {
@@ -146,6 +146,7 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
                     Task task = new Task();
                     task.taskId = cursor.getInt(cursor.getColumnIndex(TASK_ID_KEY));
                     task.taskName = cursor.getString(cursor.getColumnIndex(TASK_NAME));
+                    task.taskDate = loadDate(cursor, cursor.getColumnIndex(TASK_DATE));
 
                     tasks.add(task);
                 } while (cursor.moveToNext());
@@ -158,5 +159,19 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return tasks;
+    }
+
+    private Long persistDate(Date date) {
+        if (date != null) {
+            return date.getTime();
+        }
+        return null;
+    }
+
+    private Date loadDate(Cursor cursor, int index) {
+        if (cursor.isNull(index)) {
+            return null;
+        }
+        return new Date(cursor.getLong(index));
     }
 }
