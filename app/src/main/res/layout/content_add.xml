@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_margin"
+        android:fontFamily="sans-serif"
         android:orientation="vertical">
 
         <TextView
@@ -20,7 +22,8 @@
             android:layout_margin="@dimen/text_margin"
             android:text="@string/description_activity_add"
             android:textColor="@android:color/tertiary_text_dark"
-            android:textSize="@dimen/small_input_text_size"/>
+            android:textSize="@dimen/medium_input_text_size"
+            android:textStyle="bold"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -29,7 +32,10 @@
             android:id="@+id/description_edit_text"
             android:layout_marginLeft="@dimen/text_margin"
             android:layout_marginRight="@dimen/text_margin"
-            android:textSize="@dimen/small_input_text_size" />
+            android:textSize="@dimen/medium_input_text_size"
+            android:background="@null"
+            android:hint="@string/description_text_hint"
+            android:textColorHint="@android:color/tertiary_text_dark"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,16 +45,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/date_label"
-                android:layout_margin="@dimen/text_margin"
                 android:text="@string/date_activity_add"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
                 android:textColor="@android:color/tertiary_text_dark"
                 android:textSize="@dimen/medium_input_text_size"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
                 android:layout_weight="1"/>
 
             <ImageButton
-                android:layout_width="@dimen/small_icon_size"
-                android:layout_height="@dimen/small_icon_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/add_date_button"
+                android:background="@null"
                 android:src="@mipmap/ic_pick_date" />
         </LinearLayout>
 
@@ -56,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/selected_date_label"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
             android:textColor="@android:color/tertiary_text_dark"
             android:textSize="@dimen/medium_input_text_size" />
     </LinearLayout>
