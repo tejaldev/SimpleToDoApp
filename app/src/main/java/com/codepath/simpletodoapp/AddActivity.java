@@ -80,14 +80,21 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
             @Override
             public void onClick(View v) {
                 // open date picker dialog
+                if (!isDateSet) {
+                    switch (mode) {
+                        case Mode.EDIT:
+                            datePickerDialog.updateDate(selectedTask.taskDate.getYear() + 1900, selectedTask.taskDate.getMonth(), selectedTask.taskDate.getDate());
+                            break;
+                    }
+                }
                 datePickerDialog.show();
             }
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View view){
                 if (TextUtils.isEmpty(descriptionText.getText().toString())) {
                     Intent resultIntent = new Intent();
                     setResult(RESULT_CANCELED, resultIntent);
